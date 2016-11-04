@@ -1,0 +1,42 @@
+{{ diagnostic }}
+<form class="form-horizontal" (ngSubmit)="onSubmit()" #bookForm="ngForm">
+	<fieldset>
+		<div class="form-group">
+			<label for="author" class="col-lg-2 control-label">Author</label>
+			<div class="col-lg-10">
+				<input type="text" placeholder="Author" class="form-control" id="author" name="author"
+          #author="ngModel" [(ngModel)]="model.author"
+					required minlength="2">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="name" class="col-lg-2 control-label">Name</label>
+			<div class="col-lg-10">
+				<input type="text" placeholder="Name" class="form-control" id="name" name="name"
+          #name="ngModel" [(ngModel)]="model.name"
+          required minlength="2">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="page" class="col-lg-2 control-label">Page</label>
+			<div class="col-lg-10">
+				<input type="number" placeholder="Page" class="form-control" id="page" name="page"
+          #page="ngModel" [(ngModel)]="model.page"
+          required>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="totalPage" class="col-lg-2 control-label">Total Page</label>
+			<div class="col-lg-10">
+				<input type="number" placeholder="Total Page" class="form-control" id="totalPage" name="totalPage"
+        #totalPage [(ngModel)]="model.totalPage"
+        required>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-lg-10 col-lg-offset-2">
+				<button type="submit" class="btn btn-primary">Add Book</button>
+			</div>
+		</div>
+	</fieldset>
+</form>

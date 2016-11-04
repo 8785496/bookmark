@@ -24,10 +24,9 @@ export class AppComponent {
    });
   }
 
-  addBook(author: string, name: string, page: number, totalPage: number) {
-    if (this.uid !== '') {
-      this.books.push({name: name, author: author, page: page, totalPage: totalPage, pid: this.uid});
-      author = '';
+  removeBook(key: string, book: any) {
+    if (confirm(`Delete this book? ${book.name}`)) {
+      this.books.remove(key);
     }
   }
 }

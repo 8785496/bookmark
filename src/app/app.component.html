@@ -1,45 +1,17 @@
 <app-navbar></app-navbar>
 <div class="container">
 
-<form class="form-horizontal">
-  <fieldset>
-    <div class="form-group">
-      <label for="author" class="col-lg-2 control-label">Author</label>
-      <div class="col-lg-10">
-        <input #author type="text" class="form-control" id="author" placeholder="Author">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="name" class="col-lg-2 control-label">Name</label>
-      <div class="col-lg-10">
-        <input #name type="text" class="form-control" id="name" placeholder="Name">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="page" class="col-lg-2 control-label">Page</label>
-      <div class="col-lg-10">
-        <input #page type="text" class="form-control" id="page" placeholder="Page">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="totalPage" class="col-lg-2 control-label">Total Page</label>
-      <div class="col-lg-10">
-        <input #totalPage type="text" class="form-control" id="totalPage" placeholder="Total Page">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-lg-10 col-lg-offset-2">
-        <button (click)="addBook(author.value, name.value, page.value, totalPage.value)" type="submit" class="btn btn-primary">Add Book</button>
-      </div>
-    </div>
-  </fieldset>
-</form>
+<app-form></app-form>
 
 <div *ngFor="let book of books | async">
   <hr>
-  <div><strong>{{book.author}}</strong> {{book.name}}</div>
+  <div>
+    <strong>{{book.author}}</strong> {{book.name}}
+    <button type="button" class="btn btn-xs btn-danger" (click)="removeBook(book.$key, book)" style="float: right">X</button>
+  </div>
   <div>стр. {{book.page}} из {{book.totalPage}}</div>
   <div class="progress progress-striped">
     <div class="progress-bar progress-bar-info" [ngStyle]="{'width': (book.page / book.totalPage * 100) + '%'}"></div>
   </div>
-</div>
+  
+</div> 

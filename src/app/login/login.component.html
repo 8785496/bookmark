@@ -4,5 +4,5 @@
     <button (click)="loginGithub()" *ngIf="(af.auth | async) === null" class="btn btn-primary">
         <i class="fa fa-google fa-lg" aria-hidden="true"></i> Вход</button>
     <button (click)="logout()" *ngIf="(af.auth | async) !== null" class="btn btn-default">
-        <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i> Выход ({{ (af.auth | async)?.uid }})</button>    
+        <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i> Выход</button>    
 </div>
