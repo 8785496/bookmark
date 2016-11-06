@@ -2,40 +2,80 @@
 <form class="form-horizontal" (ngSubmit)="onSubmit()" #bookForm="ngForm">
 	<fieldset>
 		<div class="form-group">
-			<label for="author" class="col-lg-2 control-label">Author</label>
+			<label for="author" class="col-lg-2 control-label">Автор</label>
 			<div class="col-lg-10">
-				<input type="text" placeholder="Author" class="form-control" id="author" name="author"
-          #author="ngModel" [(ngModel)]="model.author"
-					required minlength="2">
+				
+				<input type="text" placeholder="Author" class="form-control" id="author" required minlength="2" maxlength="64" name="author" 
+					#author="ngModel" [(ngModel)]="model.author">
+				
+				<div *ngIf="author.dirty && author.errors" class="alert alert-danger">
+					<div [hidden]="!author.errors.required">
+						Поле обязательное
+					</div>
+					<div [hidden]="!author.errors.minlength">
+						Значение должно быть не менее 2 символов
+					</div>
+					<div [hidden]="!author.errors.maxlength">
+						Значение должно быть не более 64 символов
+					</div>
+				</div>
+
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="name" class="col-lg-2 control-label">Name</label>
+			<label for="name" class="col-lg-2 control-label">Название</label>
 			<div class="col-lg-10">
-				<input type="text" placeholder="Name" class="form-control" id="name" name="name"
-          #name="ngModel" [(ngModel)]="model.name"
-          required minlength="2">
+				
+				<input type="text" placeholder="Name" class="form-control" id="name" name="name" #name="ngModel" [(ngModel)]="model.name"
+					required minlength="2" maxlength="128">
+				
+				<div *ngIf="name.dirty && name.errors" class="alert alert-danger">
+					<div [hidden]="!name.errors.required">
+						Поле обязательное
+					</div>
+					<div [hidden]="!name.errors.minlength">
+						Значение должно быть не менее 2 символов
+					</div>
+					<div [hidden]="!name.errors.maxlength">
+						Значение должно быть не более 128 символов
+					</div>
+				</div>
+
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="page" class="col-lg-2 control-label">Page</label>
+			<label for="page" class="col-lg-2 control-label">Страница</label>
 			<div class="col-lg-10">
-				<input type="number" placeholder="Page" class="form-control" id="page" name="page"
-          #page="ngModel" [(ngModel)]="model.page"
-          required>
+				
+				<input type="number" placeholder="Page" class="form-control" id="page" name="page" #page="ngModel" [(ngModel)]="model.page"
+					required>
+
+				<div *ngIf="page.dirty && page.errors" class="alert alert-danger">
+					<div [hidden]="!page.errors.required">
+						Поле обязательное
+					</div>
+				</div>
+
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="totalPage" class="col-lg-2 control-label">Total Page</label>
+			<label for="totalPage" class="col-lg-2 control-label">Всего страниц</label>
 			<div class="col-lg-10">
-				<input type="number" placeholder="Total Page" class="form-control" id="totalPage" name="totalPage"
-        #totalPage [(ngModel)]="model.totalPage"
-        required>
+				
+				<input type="number" placeholder="Total Page" class="form-control" id="totalPage" name="totalPage" #totalPage [(ngModel)]="model.totalPage"
+					required>
+
+				<div *ngIf="totalPage.dirty && totalPage.errors" class="alert alert-danger">
+					<div [hidden]="!totalPage.errors.required">
+						Поле обязательное
+					</div>
+				</div>
+
 			</div>
 		</div>
 		<div class="form-group">
 			<div class="col-lg-10 col-lg-offset-2">
-				<button type="submit" class="btn btn-primary">Add Book</button>
+				<button type="submit" class="btn btn-primary" [disabled]="!bookForm.form.valid">Добавить книгу</button>
 			</div>
 		</div>
 	</fieldset>

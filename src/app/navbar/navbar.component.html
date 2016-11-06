@@ -1,20 +1,28 @@
 <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" (click)="toggleCollapse()">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Закладки</a>
-    </div>
+			<a class="navbar-brand" href="/">Закладки</a>
+		</div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Книги <span class="sr-only">(current)</span></a></li>
-      </ul>
-      <app-login></app-login>
-    </div>
-  </div>
+		<div class="navbar-collapse" id="bs-example-navbar-collapse-1" [class.collapse]="collapse">
+			<ul class="nav navbar-nav">
+				<li class=""><a routerLink="/list" routerLinkActive="active">Книги</a></li>
+				<li class=""><a routerLink="/book-add" routerLinkActive="active">Добавить книгу</a></li>
+			</ul>
+			<div class="navbar-form nav navbar-nav navbar-right">
+				<button (click)="loginGithub()" *ngIf="(af.auth | async) === null" class="btn btn-primary">
+        <i class="fa fa-github fa-lg" aria-hidden="true"></i> Вход</button>
+				<button (click)="loginGoogle()" *ngIf="(af.auth | async) === null" class="btn btn-primary">
+        <i class="fa fa-google fa-lg" aria-hidden="true"></i> Вход</button>
+				<button (click)="logout()" *ngIf="(af.auth | async) !== null" class="btn btn-default">
+        <i class="fa fa-sign-out fa-lg" aria-hidden="true"></i> Выход</button>
+			</div>
+		</div>
+	</div>
 </nav>

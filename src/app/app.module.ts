@@ -3,11 +3,23 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
+import { RouterModule, Routes } from '@angular/router';
 
+//import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { LoginComponent } from './login/login.component';
 import { FormComponent } from './form/form.component';
+import { ListComponent } from './list/list.component';
+import { BookComponent } from './book/book.component';
+import { BookAddComponent } from './book-add/book-add.component';
+
+const routes: Routes = [
+  //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/list', pathMatch: 'full' },
+  { path: 'book/:id', component: BookComponent },
+  { path: 'book-add', component: BookAddComponent },
+  { path: 'list', component: ListComponent }
+];
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDc8aMpqXQguHAOUg3lMCKYlxKoVxFNlSw",
@@ -16,18 +28,20 @@ export const firebaseConfig = {
   storageBucket: "bookmark-24e12.appspot.com"
 };
 
-
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    LoginComponent,
-    FormComponent
+    FormComponent,
+    ListComponent,
+    BookComponent,
+    BookAddComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [],
