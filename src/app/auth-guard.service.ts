@@ -34,6 +34,7 @@ export class AuthGuard implements CanActivate {
     //return this.checkLogin();
     //return this._observable;
     this._observable = this.af.auth.map(auth => true);
+    Observable.create()
     console.log(this._observable);
     return this._observable;
   }
