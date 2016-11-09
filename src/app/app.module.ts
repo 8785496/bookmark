@@ -13,13 +13,14 @@ import { ListComponent } from './list/list.component';
 import { BookComponent } from './book/book.component';
 import { BookAddComponent } from './book-add/book-add.component';
 import { UnAuthComponent } from './un-auth/un-auth.component';
+import { AuthGuard } from './auth-guard.service';
 
 const routes: Routes = [
   //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: '', redirectTo: '/list', pathMatch: 'full' },
   { path: 'book/:id', component: BookComponent },
   { path: 'book-add', component: BookAddComponent },
-  { path: 'list', component: ListComponent },
+  { path: 'list', component: ListComponent, canActivate: [AuthGuard] },
   { path: 'un-auth', component: UnAuthComponent },
 ];
 
@@ -47,7 +48,7 @@ export const firebaseConfig = {
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

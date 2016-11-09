@@ -13,16 +13,16 @@ export class NavbarComponent implements OnInit {
   constructor(public af: AngularFire, private router: Router) { }
 
   ngOnInit() {
-    this.af.auth.subscribe(auth => {
-      console.log(auth);
-      if (auth === null) {
-        this.router.navigate(['/un-auth']);
-        console.log('redirect: un-auth');
-      } else {
-        this.router.navigate(['/list']);
-        console.log('redirect: list');
-      }
-    });
+    // this.af.auth.subscribe(auth => {
+    //   console.log(auth);
+    //   if (auth === null) {
+    //     this.router.navigate(['/un-auth']);
+    //     console.log('redirect: un-auth');
+    //   } else {
+    //     this.router.navigate(['/list']);
+    //     console.log('redirect: list');
+    //   }
+    // });
   }
 
   toggleCollapse() {
