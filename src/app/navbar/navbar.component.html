@@ -12,8 +12,8 @@
 
 		<div class="navbar-collapse" id="bs-example-navbar-collapse-1" [class.collapse]="collapse">
 			<ul class="nav navbar-nav">
-				<li class=""><a routerLink="/list" routerLinkActive="active">Книги</a></li>
-				<li class=""><a routerLink="/book-add" routerLinkActive="active">Добавить книгу</a></li>
+				<li routerLinkActive="active"><a routerLink="/books">Книги</a></li>
+				<li routerLinkActive="active"><a routerLink="/bookadd">Добавить книгу</a></li>
 			</ul>
 			<div class="navbar-form nav navbar-nav navbar-right">
 				<button (click)="loginGithub()" *ngIf="(af.auth | async) === null" class="btn btn-primary">

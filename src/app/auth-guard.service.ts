@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Operator } from 'rxjs/Operator';
 import 'rxjs/add/operator/map';
 import { CanActivate } from '@angular/router';
 import { AngularFire, FirebaseAuth, FirebaseAuthState } from 'angularfire2';
@@ -7,65 +8,43 @@ import { AngularFire, FirebaseAuth, FirebaseAuthState } from 'angularfire2';
 @Injectable()
 export class AuthGuard implements CanActivate {
   private authState: FirebaseAuthState;
+  public _observable: Observable<boolean>;
 
-  constructor(private af: AngularFire) {
-    // af.auth.forEach(auth => auth !== null);
-    
-    // this.authState = auth.getAuth();
-    // auth.subscribe((state: FirebaseAuthState) => {
-    //   this.authState = state;
+  constructor(public af: AngularFire) {
+    console.log('AuthGuard constructor', this.af.auth);
+
+    //return this.af.auth.map(auth => true)
+    // this._observable = Observable.create(observer => {
+    //   this.af.auth.lift
+      
+    //   subscribe(auth => {
+    //     console.log('AuthGuard', auth);
+    //     observer.next(auth !== null);
+    //   })
+    //   //observer.complete();
     // });
-    
+    // //op: Operator<AngularFireAuth, boolean>
+
+    // //this._observable = this.af.auth.lift(op);
+
   }
 
   canActivate() {
     console.log('AuthGuard#canActivate called');
     //return this.checkLogin();
-    // return this.af.auth.map(auth => {
-    //   console.log(auth); 
-    //   return true;
-    //   // return Observable.create(observer => {
-    //   //   observer.next(true);
-    //   //   observer.complete();
-    //   // });
-    // });
-    let temp: Observable<boolean> = this.af.auth.map(auth => {return null});
-    console.log(temp);
-    return temp;
-
+    //return this._observable;
+    this._observable = this.af.auth.map(auth => true);
+    console.log(this._observable);
+    return this._observable;
   }
 
-  checkLogin(): Observable<boolean> {
-    // return Observable.create(observer => {
-    //   observer.next(true);
-    //   observer.complete();
-    // });
-    return this.af.auth.map(auth => {
-      console.log(auth); 
-      return true;
-    });
-  }
-
-  // checkLogin(): boolean {
-  //   // if (this.authService.isLoggedIn) { return true; }
-  //   if (this.auth.getAuth !== null) { return true; }
-
-  //   // // Store the attempted URL for redirecting
-  //   // this.authService.redirectUrl = url;
-
-  //   // // Create a dummy session id
-  //   // let sessionId = 123456789;
-
-  //   // // Set our navigation extras object
-  //   // // that contains our global query params and fragment
-  //   // let navigationExtras: NavigationExtras = {
-  //   //     queryParams: { 'session_id': sessionId },
-  //   //     fragment: 'anchor'
-  //   // };
-
-  //   // // Navigate to the login page with extras
-  //   // this.router.navigate(['/login'], navigationExtras);
-
-  //   return false;
+  // checkLogin(): Observable<boolean> {
+  //   return Observable.create(observer => {
+  //     this.af.auth.subscribe(auth => {
+  //       console.log(auth);
+  //       observer.next(auth !== null);
+  //     })
+  //     observer.complete();
+  //   });
   // }
 }

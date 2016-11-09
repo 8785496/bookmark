@@ -14,14 +14,14 @@ import { BookComponent } from './book/book.component';
 import { BookAddComponent } from './book-add/book-add.component';
 import { UnAuthComponent } from './un-auth/un-auth.component';
 import { AuthGuard } from './auth-guard.service';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: '', redirectTo: '/list', pathMatch: 'full' },
-  { path: 'book/:id', component: BookComponent },
-  { path: 'book-add', component: BookAddComponent },
-  { path: 'list', component: ListComponent, canActivate: [AuthGuard] },
-  { path: 'un-auth', component: UnAuthComponent },
+  { path: '', redirectTo: '/books', pathMatch: 'full' },
+  { path: 'books', component: ListComponent, canActivate: [AuthGuard] },
+  { path: 'book/:id', component: BookComponent, canActivate: [AuthGuard] },
+  { path: 'bookadd', component: BookAddComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: UnAuthComponent },
 ];
 
 export const firebaseConfig = {
@@ -39,7 +39,8 @@ export const firebaseConfig = {
     ListComponent,
     BookComponent,
     BookAddComponent,
-    UnAuthComponent
+    UnAuthComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

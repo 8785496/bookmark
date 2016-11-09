@@ -12,18 +12,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(public af: AngularFire, private router: Router) { }
 
-  ngOnInit() {
-    // this.af.auth.subscribe(auth => {
-    //   console.log(auth);
-    //   if (auth === null) {
-    //     this.router.navigate(['/un-auth']);
-    //     console.log('redirect: un-auth');
-    //   } else {
-    //     this.router.navigate(['/list']);
-    //     console.log('redirect: list');
-    //   }
-    // });
-  }
+  ngOnInit() { }
 
   toggleCollapse() {
     this._collapse = !this._collapse;
@@ -49,13 +38,15 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.af.auth.logout();
-    // this.af.auth.subscribe(auth => {
-    //   if (auth === null) {
-    //     console.log('logout', auth);
-    //     this.router.navigate(['/list']);
-    //     // TODO
-    //   }
-    // });
+    let subscr = this.af.auth.subscribe(
+      auth => {
+        if (auth === null) {
+          console.log('logout', auth);
+          subscr.unsubscribe();
+          this.router.navigate(['/login']);
+        }
+      }
+    );
   }
 
 }
