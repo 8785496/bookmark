@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'books', component: ListComponent, canActivate: [AuthGuard] },
   { path: 'book/:id', component: BookComponent, canActivate: [AuthGuard] },
   { path: 'bookadd', component: BookAddComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: UnAuthComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 export const firebaseConfig = {

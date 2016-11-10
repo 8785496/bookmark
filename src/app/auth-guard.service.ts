@@ -8,44 +8,26 @@ import { AngularFire, FirebaseAuth, FirebaseAuthState } from 'angularfire2';
 @Injectable()
 export class AuthGuard implements CanActivate {
   private authState: FirebaseAuthState;
-  public _observable: Observable<boolean>;
+  public authObservable: Observable<boolean>;
 
   constructor(public af: AngularFire) {
-    console.log('AuthGuard constructor', this.af.auth);
 
-    //return this.af.auth.map(auth => true)
-    // this._observable = Observable.create(observer => {
-    //   this.af.auth.lift
-      
-    //   subscribe(auth => {
-    //     console.log('AuthGuard', auth);
-    //     observer.next(auth !== null);
-    //   })
-    //   //observer.complete();
-    // });
-    // //op: Operator<AngularFireAuth, boolean>
+    this.authObservable = Observable.create(observer => {
 
-    // //this._observable = this.af.auth.lift(op);
+      if (this.authState === undefined) {
+        af.auth.subscribe(auth => {
+          this.authState = auth
+          observer.next(this.authState !== null);
+        })
+      } else {
+        observer.next(this.authState !== null);
+      }
 
+      observer.complete();
+    });
   }
 
   canActivate() {
-    console.log('AuthGuard#canActivate called');
-    //return this.checkLogin();
-    //return this._observable;
-    this._observable = this.af.auth.map(auth => true);
-    Observable.create()
-    console.log(this._observable);
-    return this._observable;
+    return this.authObservable;
   }
-
-  // checkLogin(): Observable<boolean> {
-  //   return Observable.create(observer => {
-  //     this.af.auth.subscribe(auth => {
-  //       console.log(auth);
-  //       observer.next(auth !== null);
-  //     })
-  //     observer.complete();
-  //   });
-  // }
 }
