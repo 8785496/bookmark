@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -11,18 +12,13 @@ export class ListComponent implements OnInit {
   books: FirebaseListObservable<any[]>;
   private uid: string = '';
   
-  constructor(private af: AngularFire) { }
+  constructor(private af: AngularFire, private router: Router) { }
 
   ngOnInit() {
     this.af.auth.subscribe(auth => {
      if (auth) {
         this.uid = auth.uid;
-        this.books = this.af.database.list('/books', {
-          query: {
-            orderByChild: 'pid',
-            equalTo: auth.uid
-          }
-        });
+        this.books = this.af.database.list('/books/' + auth.uid);
      }
    });
   }
@@ -31,5 +27,9 @@ export class ListComponent implements OnInit {
     if (confirm(`Delete this book? ${book.name}`)) {
       this.books.remove(key);
     }
+  }
+
+  editBook(key: string) {
+    this.router.navigate(['/book/' + key]);
   }
 }

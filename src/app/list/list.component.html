@@ -1,7 +1,9 @@
 <div *ngFor="let book of books | async">
   <div>
-    <strong>{{book.author}}</strong> {{book.name}}
-    <button type="button" class="btn btn-xs btn-danger" (click)="removeBook(book.$key, book)" style="float: right">X</button>
+    <a href="#" (click)="editBook(book.$key);$event.preventDefault()"><strong>{{book.author}}</strong> "{{book.name}}"</a>
+    <button type="button" class="btn btn-xs btn-danger" (click)="removeBook(book.$key, book)" style="float: right">
+      <i class="fa fa-trash" aria-hidden="true"></i>
+    </button>
   </div>
   <div>стр. {{book.page}} из {{book.totalPage}}</div>
   <div class="progress progress-striped">

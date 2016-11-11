@@ -12,6 +12,5 @@ export class Book {
         this.page = null;
         this.totalPage = null;
         this.cover = '';
-        this.pid = '';
     }
 }

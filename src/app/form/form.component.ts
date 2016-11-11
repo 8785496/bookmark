@@ -20,8 +20,8 @@ export class FormComponent implements OnInit {
     this.af.auth.subscribe(auth => {
       if (auth) {
         this.uid = auth.uid;
-        this.books = this.af.database.list('/books');
-        this.model.pid = auth.uid;
+        this.books = this.af.database.list('/books/' + auth.uid);
+        //this.model.pid = auth.uid;
       }
     });
   }
