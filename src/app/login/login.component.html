@@ -1,4 +1,6 @@
-<div class="alert alert-warning">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+<div class="alert alert-inform" *ngIf="(af.auth | async) !== null">
+    <strong>Внимание!</strong> Вы авторизованы.
+</div>
+<div class="alert alert-warning" *ngIf="(af.auth | async) === null">
     <strong>Внимание!</strong> Автризуйтесь, чтобы делать закладки.
 </div>
