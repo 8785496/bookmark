@@ -12,7 +12,6 @@ import { FormComponent } from './form/form.component';
 import { ListComponent } from './list/list.component';
 import { BookComponent } from './book/book.component';
 import { BookAddComponent } from './book-add/book-add.component';
-import { UnAuthComponent } from './un-auth/un-auth.component';
 import { AuthGuard } from './auth-guard.service';
 import { LoginComponent } from './login/login.component';
 
@@ -39,7 +38,6 @@ export const firebaseConfig = {
     ListComponent,
     BookComponent,
     BookAddComponent,
-    UnAuthComponent,
     LoginComponent
   ],
   imports: [

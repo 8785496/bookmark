@@ -31,7 +31,7 @@ export class FormComponent implements OnInit {
   onSubmit() {
     if (this.uid !== '') {
       this.books.push(this.model).then(() => {
-        this.router.navigate(['/list']);
+        this.router.navigate(['/books']);
       });
     }
   }

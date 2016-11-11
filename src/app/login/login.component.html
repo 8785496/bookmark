@@ -1,6 +1,17 @@
-<div class="alert alert-inform" *ngIf="(af.auth | async) !== null">
-    <strong>Внимание!</strong> Вы авторизованы.
+<div class="alert alert-info" *ngIf="(af.auth | async) !== null">
+	<strong>Вы авторизованы.</strong>
 </div>
-<div class="alert alert-warning" *ngIf="(af.auth | async) === null">
-    <strong>Внимание!</strong> Автризуйтесь, чтобы делать закладки.
+<div *ngIf="(af.auth | async) === null">
+	<div class="alert alert-warning">
+		<strong>Автризуйтесь, чтобы смотреть и добавлять закладки.</strong>
+	</div>
+
+	<button type="button" class="btn btn-large btn-primary" (click)="loginGoogle()">
+        <i class="fa fa-google fa-lg" aria-hidden="true"></i>
+        Войти с помощью Google
+    </button>
+	<button type="button" class="btn btn-large btn-primary" (click)="loginGithub()">
+        <i class="fa fa-github fa-lg" aria-hidden="true"></i>
+        Войти с помощью Github
+    </button>
 </div>

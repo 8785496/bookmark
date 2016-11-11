@@ -22,20 +22,6 @@ export class NavbarComponent implements OnInit {
     return this._collapse;
   }
 
-  loginGoogle() {
-    this.af.auth.login({
-      provider: AuthProviders.Google,
-      method: AuthMethods.Popup,
-    });
-  }
-
-  loginGithub() {
-    this.af.auth.login({
-      provider: AuthProviders.Github,
-      method: AuthMethods.Popup,
-    });
-  }
-
   logout() {
     this.af.auth.logout();
     let subscr = this.af.auth.subscribe(
