@@ -1,82 +1,53 @@
-{{ diagnostic }}
 <form class="form-horizontal" (ngSubmit)="onSubmit()" #bookForm="ngForm">
-	<fieldset>
-		<div class="form-group">
-			<label for="author" class="col-lg-2 control-label">Автор</label>
-			<div class="col-lg-10">
-				
-				<input type="text" placeholder="Author" class="form-control" id="author" required minlength="2" maxlength="64" name="author" 
-					#author="ngModel" [(ngModel)]="model.author">
-				
-				<div *ngIf="author.dirty && author.errors" class="alert alert-danger">
-					<div [hidden]="!author.errors.required">
-						Поле обязательное
-					</div>
-					<div [hidden]="!author.errors.minlength">
-						Значение должно быть не менее 2 символов
-					</div>
-					<div [hidden]="!author.errors.maxlength">
-						Значение должно быть не более 64 символов
-					</div>
-				</div>
 
+	<div class="form-group" [class.has-error]="author.dirty && author.errors">
+		<label for="author" class="col-lg-2 control-label">Автор</label>
+		<div class="col-lg-10">
+			<input type="text" placeholder="Автор" class="form-control" id="author" required maxlength="64" name="author" #author="ngModel"
+				[(ngModel)]="model.author">
+			<div *ngIf="author.dirty">
+				<span class="help-block" *ngIf="author.errors && author.errors.required">Поле обязательное</span>
+				<span class="help-block" *ngIf="author.errors && author.errors.maxlength">Значение должно быть не более 64 символов</span>
 			</div>
 		</div>
-		<div class="form-group">
-			<label for="name" class="col-lg-2 control-label">Название</label>
-			<div class="col-lg-10">
-				
-				<input type="text" placeholder="Name" class="form-control" id="name" name="name" #name="ngModel" [(ngModel)]="model.name"
-					required minlength="2" maxlength="128">
-				
-				<div *ngIf="name.dirty && name.errors" class="alert alert-danger">
-					<div [hidden]="!name.errors.required">
-						Поле обязательное
-					</div>
-					<div [hidden]="!name.errors.minlength">
-						Значение должно быть не менее 2 символов
-					</div>
-					<div [hidden]="!name.errors.maxlength">
-						Значение должно быть не более 128 символов
-					</div>
-				</div>
+	</div>
 
+	<div class="form-group" [class.has-error]="name.dirty && name.errors">
+		<label for="name" class="col-lg-2 control-label">Название</label>
+		<div class="col-lg-10">
+			<input type="text" placeholder="Название" class="form-control" id="name" name="name" #name="ngModel" [(ngModel)]="model.name"
+				required maxlength="128">
+			<div *ngIf="name.dirty">
+				<span class="help-block" *ngIf="name.errors && name.errors.required">Поле обязательное</span>
+				<span class="help-block" *ngIf="name.errors && name.errors.maxlength">Значение должно быть не более 128 символов</span>
 			</div>
 		</div>
-		<div class="form-group">
-			<label for="page" class="col-lg-2 control-label">Страница</label>
-			<div class="col-lg-10">
-				
-				<input type="number" placeholder="Page" class="form-control" id="page" name="page" #page="ngModel" [(ngModel)]="model.page"
-					required>
+	</div>
 
-				<div *ngIf="page.dirty && page.errors" class="alert alert-danger">
-					<div [hidden]="!page.errors.required">
-						Поле обязательное
-					</div>
-				</div>
-
-			</div>
+	<div class="form-group" [class.has-error]="page.dirty && page.errors">
+		<label for="page" class="col-lg-2 control-label">Страница</label>
+		<div class="col-lg-10">
+			<input type="number" placeholder="Страница" class="form-control" id="page" name="page" #page="ngModel" [(ngModel)]="model.page"
+				required>
+			<span class="help-block" *ngIf="page.dirty && page.errors && page.errors.required">Поле обязательное</span>
 		</div>
-		<div class="form-group">
-			<label for="totalPage" class="col-lg-2 control-label">Всего страниц</label>
-			<div class="col-lg-10">
-				
-				<input type="number" placeholder="Total Page" class="form-control" id="totalPage" name="totalPage" #totalPage [(ngModel)]="model.totalPage"
-					required>
+	</div>
 
-				<div *ngIf="totalPage.dirty && totalPage.errors" class="alert alert-danger">
-					<div [hidden]="!totalPage.errors.required">
-						Поле обязательное
-					</div>
-				</div>
+	<div class="form-group" [class.has-error]="totalPage.dirty && totalPage.errors">
+		<label for="totalPage" class="col-lg-2 control-label">Всего страниц</label>
+		<div class="col-lg-10">
+			<input type="number" placeholder="Всего страниц" class="form-control" id="totalPage" name="totalPage" #totalPage="ngModel"
+				[(ngModel)]="model.totalPage" required>
+			<span class="help-block" *ngIf="totalPage.dirty && totalPage.errors && totalPage.errors.required">Поле обязательное</span>
+		</div>
+	</div>
 
-			</div>
+	<div class="form-group">
+		<div class="col-lg-10 col-lg-offset-2">
+			<button *ngIf="action === 'add'" type="submit" class="btn btn-primary" [disabled]="!bookForm.form.valid">Добавить книгу</button>
+			<button *ngIf="action === 'edit'" type="submit" class="btn btn-primary" [disabled]="!bookForm.form.valid">Сохранить книгу</button>
+			<button type="button" class="btn btn-default" (click)="cancel()">Отменить</button>
 		</div>
-		<div class="form-group">
-			<div class="col-lg-10 col-lg-offset-2">
-				<button type="submit" class="btn btn-primary" [disabled]="!bookForm.form.valid">Добавить книгу</button>
-			</div>
-		</div>
-	</fieldset>
+	</div>
+
 </form>

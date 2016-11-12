@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Router } from '@angular/router';
 
@@ -11,16 +11,22 @@ export class ListComponent implements OnInit {
 
   books: FirebaseListObservable<any[]>;
   private uid: string = '';
-  
+
+  public image: string;
+
   constructor(private af: AngularFire, private router: Router) { }
 
   ngOnInit() {
     this.af.auth.subscribe(auth => {
-     if (auth) {
+      if (auth) {
         this.uid = auth.uid;
-        this.books = this.af.database.list('/books/' + auth.uid);
-     }
-   });
+        this.books = this.af.database.list('/books/' + auth.uid, {
+          query: {
+            orderByChild: 'update'
+          }
+        });
+      }
+    });
   }
 
   removeBook(key: string, book: any) {

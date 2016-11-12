@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import { Router } from '@angular/router';
+import { Router,  } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { Book } from '../entity/book';
 
@@ -10,29 +11,19 @@ import { Book } from '../entity/book';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-  public books: FirebaseListObservable<Book[]>;
-  public model: Book = new Book();
-  private uid: string = '';
-  
-  constructor(private af: AngularFire, private router: Router) { }
+  @Input() model: Book;
+  @Input() action: string;
+  @Input() submit;
 
-  ngOnInit() {
-    this.af.auth.subscribe(auth => {
-      if (auth) {
-        this.uid = auth.uid;
-        this.books = this.af.database.list('/books/' + auth.uid);
-        //this.model.pid = auth.uid;
-      }
-    });
-  }
+  constructor(private af: AngularFire, private router: Router, private location: Location) { }
 
-  get diagnostic() { return JSON.stringify(this.model); }
+  ngOnInit() { }
 
   onSubmit() {
-    if (this.uid !== '') {
-      this.books.push(this.model).then(() => {
-        this.router.navigate(['/books']);
-      });
-    }
+    this.submit(this.model);
+  }
+
+  cancel() {
+    this.location.back();
   }
 }

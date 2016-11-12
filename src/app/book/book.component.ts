@@ -9,9 +9,9 @@ import { Book } from '../entity/book';
   styleUrls: ['./book.component.css']
 })
 export class BookComponent implements OnInit {
-
-  public model: Book;
-  public book: FirebaseObjectObservable<Book>;
+  public model: Book = new Book();
+  public action: string = 'edit';
+  private book: FirebaseObjectObservable<Book>;
 
   constructor(private af: AngularFire, private router: Router, private route: ActivatedRoute) { }
 
@@ -21,14 +21,23 @@ export class BookComponent implements OnInit {
 
       this.af.auth.forEach(auth => {
         this.book = this.af.database.object('/books/' + auth.uid + '/' + id);
-        
+
         this.book.forEach(book => {
           this.model = book;
-          console.log(this.book);
         });
-
       })
     });
   }
 
+  submit(book: Book) {
+    this.book.update({
+      'author': book.author,
+      'name': book.name,
+      'page': book.page,
+      'total': book.totalPage,
+      'update': -Date.now()
+    }).then(() => {
+      this.router.navigate(['/books']);
+    })
+  }
 }
