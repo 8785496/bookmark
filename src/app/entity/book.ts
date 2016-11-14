@@ -3,7 +3,6 @@ export class Book {
     public name: string;
     public page: number;
     public totalPage: number;
-    public cover: string;
     public update: number;
     
     constructor() {
