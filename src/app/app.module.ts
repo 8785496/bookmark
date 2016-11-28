@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { RouterModule, Routes } from '@angular/router';
@@ -14,13 +14,15 @@ import { BookComponent } from './book/book.component';
 import { BookAddComponent } from './book-add/book-add.component';
 import { AuthGuard } from './auth-guard.service';
 import { LoginComponent } from './login/login.component';
+import { MovieComponent } from './movie/movie.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/books', pathMatch: 'full' },
+  { path: '', redirectTo: '/movie', pathMatch: 'full' },
   { path: 'books', component: ListComponent, canActivate: [AuthGuard] },
   { path: 'book/:id', component: BookComponent, canActivate: [AuthGuard] },
   { path: 'bookadd', component: BookAddComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'movie', component: MovieComponent },
 ];
 
 export const firebaseConfig = {
@@ -38,11 +40,13 @@ export const firebaseConfig = {
     ListComponent,
     BookComponent,
     BookAddComponent,
-    LoginComponent
+    LoginComponent,
+    MovieComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(firebaseConfig)
