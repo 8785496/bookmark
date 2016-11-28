@@ -14,17 +14,24 @@ export class ListComponent implements OnInit {
 
   public image: string;
 
+  private fetched: boolean = false;
+
   constructor(private af: AngularFire, private router: Router) { }
 
   ngOnInit() {
     this.af.auth.subscribe(auth => {
       if (auth) {
         this.uid = auth.uid;
+
         this.books = this.af.database.list('/books/' + auth.uid, {
           query: {
             orderByChild: 'update'
           }
         });
+
+        this.books.subscribe(snapshot => {
+          this.fetched = true;
+        })
       }
     });
   }

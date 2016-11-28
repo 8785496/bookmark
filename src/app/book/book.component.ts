@@ -34,7 +34,7 @@ export class BookComponent implements OnInit {
       'author': book.author,
       'name': book.name,
       'page': book.page,
-      'total': book.totalPage,
+      'totalPage': book.totalPage,
       'update': -Date.now()
     }).then(() => {
       this.router.navigate(['/books']);

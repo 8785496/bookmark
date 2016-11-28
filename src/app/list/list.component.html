@@ -1,3 +1,4 @@
+<div *ngIf="!fetched">Загрузка...<hr /></div>
 <div *ngFor="let book of books | async">
 	<div>
 		<a href="#" (click)="editBook(book.$key);$event.preventDefault()"><strong>{{book.author}}</strong> "{{book.name}}"</a>
